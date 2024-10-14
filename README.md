@@ -6,7 +6,7 @@ git clone git@github.com:novozhilovsergeydisk/website_checker_bot .
 
 ## Initializing the module
 
-go mod init packet-name
+go mod init uptime_quardian_bot
 
 ## Installing packages
 
@@ -14,9 +14,7 @@ go get github.com/go-telegram-bot-api/telegram-bot-api/v5
 
 ## Creating a systemd service
 
-Create a service file in /etc/systemd/system/uptime_quardian_bot.service
-
-Open the file in the editor - sudo nano /etc/systemd/system/uptime_quardian.service
+sudo nano /etc/systemd/system/uptime_quardian_bot.service
 
 Paste the following code into it
 
@@ -27,7 +25,7 @@ After=network.target
 
 [Service]
 Type=simple
-User=your_username  # Replace with your username
+User=root  # Replace with your username
 WorkingDirectory=/path/to/uptime_quardian_bot   # Replace with the path to your project
 ExecStart=/usr/local/go/bin/go run /path/to/uptime_quardian_bot/cmd/bot/main.go   # Path to your Go binary
 Restart=on-failure
@@ -39,13 +37,13 @@ WantedBy=multi-user.target
 
 #### Explanation of parameters:
 
->Description — a short description of the service.
-After=network.target — the service is started after network services.
-User — the user on whose behalf the service will be started.
-WorkingDirectory — the working directory for the bot.
-ExecStart — the command to start the bot. Make sure the path to your Go binary is correct.
-Restart=on-failure — automatically restarts the bot if it fails.
-Environment — an environment variable for passing the Telegram token.
+>**Description** — a short description of the service.  
+**After=network.target** — the service is started after network services.  
+**User** — the user on whose behalf the service will be started.  
+**WorkingDirectory** — the working directory for the bot.  
+**ExecStart** — the command to start the bot. Make sure the path to your Go binary is correct.  
+**Restart=on-failure** — automatically restarts the bot if it fails.  
+**Environment** — an environment variable for passing the Telegram token.
 
 ## Updating systemd
 
